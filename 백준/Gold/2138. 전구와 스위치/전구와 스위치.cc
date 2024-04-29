@@ -1,24 +1,14 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 #include <string>
-#include <stack>
-#include <queue>
-#define INF 987654321
 using namespace std;
 
-int n, ans=INF, cnt=0;
+int n, ans=100006;
 string st, dt, temp;
-
-void lightOn(int idx){
-	if(idx>0) temp[idx-1] = (temp[idx-1]=='0') ? '1' : '0';
-	temp[idx] = (temp[idx]=='0') ? '1' : '0';
-	if(idx<n-1) temp[idx+1] = (temp[idx+1]=='0') ? '1' : '0';
-}
 
 void solve(int first){
 	temp = st;
-	cnt = 0;
+	int cnt = 0;
 	
 	if(first==0){
 		temp[0] = (temp[0]=='0') ? '1' : '0';
@@ -28,7 +18,9 @@ void solve(int first){
 	
 	for(int i=1; i<n; i++){
 		if(temp[i-1] != dt[i-1]){
-			lightOn(i);
+			temp[i-1] = (temp[i-1]=='0') ? '1' : '0';
+	        temp[i] = (temp[i]=='0') ? '1' : '0';
+	        if(i<n-1) temp[i+1] = (temp[i+1]=='0') ? '1' : '0';
 			cnt++;
 		}
 	}
@@ -44,7 +36,7 @@ int main(){
 	solve(0);
 	solve(1);
 	
-	if(ans!=INF) cout << ans << endl;
+	if(ans!=100006) cout << ans << endl;
 	else cout << -1 << endl;
 
 	return 0;
