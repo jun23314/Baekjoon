@@ -16,12 +16,11 @@ int cal(int M, int N) {
 		int tmp = A[end] - A[start];
 
 		if (tmp == M) return M;
-
-		if (tmp >= M) {
+		else if (tmp > M) {
 			start++;
 			smaller = min(smaller, tmp);
 		}
-		else if (tmp < M) end++;
+		else end++;
 	}
 
 	return smaller;
