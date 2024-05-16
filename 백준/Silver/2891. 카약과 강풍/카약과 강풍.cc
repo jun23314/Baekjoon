@@ -1,44 +1,39 @@
-#include <iostream>
+#include <cstdio>
 
 using namespace std;
 
-int n, s, r, kayak[12], ans;
+int board[12], ans;
 
 int main(){
-  cin >> n >> s >> r;
+  int n, s, r;
+  scanf("%d %d %d", &n, &s, &r);
 
   for(int i = 1; i <= n; i++) {
-    kayak[i] = 1;
+    board[i] = 1;
   }
 
-  for(int i = 0, teamNum; i < s; i++) {
-    cin >> teamNum;
-    kayak[teamNum]--;
+  for(int i = 0; i < s; i++) {
+    int k;
+    scanf("%d", &k);
+    board[k]--;
   }
 
-  for(int i = 0, teamNum; i < r; i++) {
-    cin >> teamNum;
-    kayak[teamNum]++;
+  for(int i = 0; i < r; i++) {
+    int k;
+    scanf("%d", &k);
+    board[k]++;
   }
 
   for(int i = 1; i <= n; i++) {
-    if(kayak[i] == 2){
-      if(!kayak[i-1]) {
-        kayak[i] = kayak[i-1] = 1;
-        continue;
-      }
-    }
-    if(kayak[i] == 2){
-      if(!kayak[i+1]) {
-        kayak[i] = kayak[i+1] = 1;
-        continue;
-      }
+    if(board[i] == 2){
+      if(!board[i-1]) board[i] = board[i-1] = 1;
+      else if(!board[i+1]) board[i] = board[i+1] = 1;
     }
   }
 
   for(int i = 1; i <= n; i++)
-    if(!kayak[i])
+    if(!board[i])
       ans++;
 
-  cout << ans;
+  printf("%d", ans);
 }
