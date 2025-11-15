@@ -5,6 +5,7 @@ public class Main {
     private static char[][] seats = new char[5][5];
     private static int[][] princess = new int[5][5];
     private static int count = 0;
+    int counting = 0;
 
     private static final int[] dx = {1, 0, -1, 0};
     private static final int[] dy = {0, -1, 0, 1};
@@ -22,11 +23,11 @@ public class Main {
             e.printStackTrace();
         }
 
-        find7Princess(0,0);
+        find7Princess(0,0, 0);
         System.out.print(count);
     }
 
-    private void find7Princess(int idx, int cnt){
+    private void find7Princess(int idx, int cnt, int yFamily){
         if(cnt == 7) { // 7공주 다 골랐다
             checkPrincessGroup();
             return;
@@ -34,8 +35,12 @@ public class Main {
 
         for(int i = idx; i < 25; ++i){
             if(princess[i / 5][i % 5] == 1) continue;
+            if (seats[i / 5][i % 5] == 'Y') {
+                if (yFamily == 3)
+                    continue;
+            }
             princess[i / 5][i % 5] = 1;
-            find7Princess(i+1, cnt + 1);
+            find7Princess(i + 1, cnt + 1, yFamily);
             princess[i / 5][i % 5] = 0;
         }
     }
