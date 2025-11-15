@@ -34,7 +34,6 @@ public class Main {
         }
 
         for(int i = idx; i < 25; ++i){
-            if(princess[i / 5][i % 5] == 1) continue;
             if (seats[i / 5][i % 5] == 'Y') {
                 if (yFamily == 3)
                     continue;
